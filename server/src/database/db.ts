@@ -36,12 +36,21 @@ const getPlayers = async (): Promise<Player[]> => {
   )[0];
 };
 
+const createPlayer = async (playerData: Partial<Player>) => {
+  const keys = Object.keys(playerData);
+  const placeholders = keys.join(",");
+  await query(
+    `INSERT INTO players (${placeholders})
+    VALUES (${Array(keys.length).fill("?").join(",")})`,
+    Object.values(playerData)
+  );
+};
+
 const updatePlayer = async (ffeId: string, updates: Partial<Player>) => {
-  const placeholders = Object.keys(updates).map((key) => `${key} = ?`).join();
-  const action = await query(`UPDATE players SET ${placeholders} WHERE ffeId = ?;`, [
+  const placeholders = Object.keys(updates).map((key) => `${key} = ?`).join(",");
+  await query(`UPDATE players SET ${placeholders} WHERE ffeId = ?;`, [
     ...Object.values(updates), ffeId
   ]);
-  console.log(action);
 };
 
 const getMatches = async (): Promise<MatchWithOpponent[]> => {
@@ -84,6 +93,7 @@ const getRoster = async (matchId: number): Promise<{
 export default {
   getPlayer,
   getPlayers,
+  createPlayer,
   updatePlayer,
   getMatches,
   getRoster

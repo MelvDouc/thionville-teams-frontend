@@ -1,16 +1,11 @@
-extends /__base.pug
-
-block vars
-  - const title = `Modifier ${player.ffeId}`;
-
-block main
-  form(action=`/players/update?ffeId=${player.ffeId}` method="POST")
+mixin playerForm(action, player)
+  form(action=action method="POST")
     div
       label(for="ffeId") N° FFE
       input(type="text" id="ffeId" name="ffeId" value=player.ffeId required)
     div
       label(for="fideId") N° FIDE
-      input(type="text" id="fideId" name="fideId" value=player.fideId required)
+      input(type="text" id="fideId" name="fideId" value=player.fideId)
     div
       label(for="email") Email
       input(type="email" id="email" name="email" value=player.email)
@@ -28,7 +23,7 @@ block main
       input(type="text" id="cat" name="cat" value=player.cat)
     div
       label(for="rating") Elo
-      input(type="number" id="rating" name="rating" value=player.rating)
+      input(type="number" id="rating" name="rating" value=player.rating || 1199)
     div
       div
         input(type="radio" name="active" id="active_true" value="active_true" checked=player.active)

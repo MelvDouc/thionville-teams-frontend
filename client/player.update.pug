@@ -1,0 +1,8 @@
+extends /__base.pug
+
+block vars
+  - const title = `Modifier ${player.ffeId}`;
+
+block main
+  include player.form.pug
+  +playerForm(`/players/update?ffeId=${player.ffeId}`, player)
