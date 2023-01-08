@@ -1,0 +1,24 @@
+extends /__base.pug
+
+block vars
+  - const title = `Match #${match.id}`;
+
+block main
+  div
+    h2=match.opponent
+    p=match.date
+    p=match.address
+  table.table
+    thead
+      tr
+        th &Eacute;ch.
+        th Joueur
+        th Elo
+        th N° FFE
+    tbody
+      each player, i in roster
+        tr
+          td=String(i + 1) + ((match.isWhiteOnBoard1 !== i % 2) ? "B" : "N")
+          td=`${player.firstName} ${player.lastName}`
+          td=player.rating
+          td=player.ffeId

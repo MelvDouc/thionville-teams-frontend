@@ -1,0 +1,23 @@
+extends /__base.pug
+
+block vars
+  - const title = "Accueil"
+
+block main
+  table.table
+    thead
+      tr
+        th Rd.
+        th Date
+        th Adversaire
+        th Adresse
+        th Joueurs
+    tbody
+      each match in matches
+        tr
+          td=match.round
+          td=match.date
+          td=match.opponent
+          td.white-space-line=match.address
+          td
+            a(href=`/match/${match.id}`) Voir

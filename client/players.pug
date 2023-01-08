@@ -1,0 +1,28 @@
+extends /__base.pug
+
+block vars
+  - const title = "Players"
+
+block main
+  table.table
+    thead
+      tr
+        th N° FFE
+        th Profil FIDE
+        th Email
+        th Nom
+        th Elo
+        th Actif
+        th Actions
+    tbody
+      each player in players
+        tr
+          td=player.ffeId
+          td
+            a(href=`https://ratings.fide.com/profile/${player.fideId}` target="_blank")=player.fideId
+          td=player.email
+          td=`${player.firstName} ${player.lastName}`
+          td=player.rating
+          td=(player.active ? "Oui" : "Non")
+          td
+            a(href=`/players/update?ffeId=${player.ffeId}`) Edit

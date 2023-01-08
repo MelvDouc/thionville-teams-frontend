@@ -1,0 +1,40 @@
+extends /__base.pug
+
+block vars
+  - const title = `Modifier ${player.ffeId}`;
+
+block main
+  form(action=`/players/update?ffeId=${player.ffeId}` method="POST")
+    div
+      label(for="ffeId") N° FFE
+      input(type="text" id="ffeId" name="ffeId" value=player.ffeId required)
+    div
+      label(for="fideId") N° FIDE
+      input(type="text" id="fideId" name="fideId" value=player.fideId required)
+    div
+      label(for="email") Email
+      input(type="email" id="email" name="email" value=player.email)
+    div
+      label(for="tel") Tél.
+      input(type="tel" id="tel" name="tel" value=player.tel)
+    div
+      label(for="firstName") Prénom
+      input(type="text" id="firstName" name="firstName" value=player.firstName)
+    div
+      label(for="lastName") Nom
+      input(type="text" id="lastName" name="lastName" value=player.lastName)
+    div
+      label(for="cat") Catégorie
+      input(type="text" id="cat" name="cat" value=player.cat)
+    div
+      label(for="rating") Elo
+      input(type="number" id="rating" name="rating" value=player.rating)
+    div
+      div
+        input(type="radio" name="active" id="active_true" value="active_true" checked=player.active)
+        label(for="active_true") Actif
+      div
+        input(type="radio" name="active" id="active_false" value="active_false" checked=!player.active)
+        label(for="active_false") Inactif
+    div
+      input(type="submit" value="Envoyer")

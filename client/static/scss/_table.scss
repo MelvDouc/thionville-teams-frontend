@@ -1,0 +1,26 @@
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    background-color: var(--clr-blue-main);
+    color: white;
+    padding: 0.4em;
+  }
+
+  tbody {
+    tr {
+      td {
+        padding: 0.4em;
+      }
+
+      &:nth-child(odd) td {
+        background-color: rgb(247, 242, 242);
+      }
+
+      &:nth-child(even) td {
+        background-color: rgb(222, 220, 220);
+      }
+    }
+  }
+}
