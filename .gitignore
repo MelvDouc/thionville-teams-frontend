@@ -1,0 +1,9 @@
+**/node_modules
+**/.vscode
+server/dist/
+
+client/css/*
+client/js/*
+
+server/**/*.json
+.env

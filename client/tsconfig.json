@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "DOM",
+      "ES2022"
+    ],
+    "module": "ES2022",
+    "moduleResolution": "Node16",
+    "rootDir": "ts",
+    "outDir": "js",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "include": [
+    "ts"
+  ],
+  "exclude": [
+    "js"
+  ]
+}

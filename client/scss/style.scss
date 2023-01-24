@@ -1,0 +1,22 @@
+:root {
+  --clr_skyblue: skyblue;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+#App {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@import "table";

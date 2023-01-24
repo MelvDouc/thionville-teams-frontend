@@ -1,0 +1,31 @@
+{
+  "name": "fide-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/dist/app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --ignore client --files server/src/app.ts",
+    "start": "node server/dist/app.js",
+    "build": "tsc -p server"
+  },
+  "keywords": [],
+  "author": "Melvin Doucet <melv.douc.programming@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.0.1",
+    "node-fetch": "^3.3.0",
+    "node-html-parser": "^6.1.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
