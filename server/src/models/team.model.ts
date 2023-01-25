@@ -29,3 +29,7 @@ export default class Team extends Model implements ITeam {
       Object.assign(this, team);
   }
 }
+
+console.log(
+  await Team.getRoster(5)
+);

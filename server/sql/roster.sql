@@ -1,7 +1,14 @@
 SELECT
-  player.ffeId,
+  ffeId,
   CONCAT(firstName, " ", UPPER(lastName)) AS fullName,
-  CONCAT(board, IF(isWhite = (board % 2 = 1), "B", "N")) AS boardAndColor
+  CONCAT(
+    board,
+    IF(
+      (board % 2 = 1) = (whiteTeamId = player.teamId),
+      "B",
+      "N"
+    )
+  ) AS boardAndColor
 FROM
   roster
   JOIN player ON roster.playerId = player.id
