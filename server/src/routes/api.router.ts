@@ -6,10 +6,10 @@ import UserController from "../controllers/user.controller.js";
 
 const apiRouter = Router();
 
-new PlayerController({ prefix: "/players", router: apiRouter });
-new TeamController({ prefix: "/teams", router: apiRouter });
-new MatchController({ prefix: "/matches", router: apiRouter });
-const uc = new UserController({ prefix: "/users", router: apiRouter });
+new PlayerController({ router: apiRouter });
+new TeamController({ router: apiRouter });
+new MatchController({ router: apiRouter });
+const uc = new UserController({ router: apiRouter });
 
 console.log(uc.getRouter());
 

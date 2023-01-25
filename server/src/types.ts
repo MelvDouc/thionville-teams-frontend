@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { } from "mysql2";
+import type Controller from "./core/Controller.js";
 
 declare global {
   namespace NodeJS {
@@ -14,15 +14,19 @@ declare global {
   }
 }
 
+export {
+  Controller
+};
+
 export type Req = Request;
 export type Res = Response;
 export type NextFn = NextFunction;
-export type UserRole = "SUPER_ADMIN" | "ADMIN" | "USER";;
+export type UserRole = "SUPER_ADMIN" | "ADMIN" | "USER";
+export type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
 
 export interface WithId {
   id: number;
 }
-
 
 export interface IPlayer extends WithId {
   /**
