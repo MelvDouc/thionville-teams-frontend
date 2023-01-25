@@ -8,4 +8,5 @@ async function getApiData<T>(path: `/${string}`) {
 }
 
 export const getPlayers = () => getApiData<Player[]>("/players/all");
+export const getTeams = () => getApiData<Team[]>("/teams/all");
 export const getMatchInfo = () => getApiData<MatchInfo[]>(`/matches/full-info?season=${season}&teamId=1154`);
