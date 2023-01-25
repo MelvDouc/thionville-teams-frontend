@@ -3,30 +3,33 @@ import matchController from "../controllers/match.controller.js";
 import playerController from "../controllers/player.controller.js";
 import teamController from "../controllers/team.controller.js";
 import userController from "../controllers/user.controller.js";
-import { Controller, HttpMethod, Path } from "../types.js";
 
 const apiRouter = Router();
 
-addControllerMethods(playerController);
-addControllerMethods(matchController);
-addControllerMethods(teamController);
-addControllerMethods(userController);
+apiRouter
+  .get("/players", playerController.getPlayer)
+  .get("/players/all", playerController.getPlayers)
+  .post("/players", playerController.createPlayer)
+  .put("/players", playerController.updatePlayer)
+  .put("/players/all", playerController.updatePlayersFromTeam)
+  .delete("/players", playerController.deletePlayer);
 
-apiRouter.all("*", (req, res) => {
-  res.status(404).send("404 Page Not Found");
-});
+apiRouter
+  .get("/teams", teamController.getTeam)
+  .get("/teams/all", teamController.getTeams)
+  .post("/teams", teamController.createTeam)
+  .put("/teams", teamController.updateTeam)
+  .delete("/teams", teamController.deleteTeam);
 
-function addControllerMethods(controller: Controller) {
-  let httpMethod: HttpMethod,
-    path: Path;
+apiRouter
+  .get("/matches", matchController.getMatch)
+  .get("/matches/all", matchController.getMatchs)
+  .get("/matches/full-info", matchController.getFullMatchesByTeamId)
+  .post("/matches", matchController.createMatch)
+  .put("/matches", matchController.updateMatch)
+  .delete("/matches", matchController.deleteMatch);
 
-  for (httpMethod in controller) {
-    const handlers = controller[httpMethod]!;
-    for (path in handlers) {
-      const handler = handlers[path] as any;
-      apiRouter[httpMethod](path, handler);
-    }
-  }
-}
+apiRouter
+  .get("/users", userController.getUser);
 
 export default apiRouter;

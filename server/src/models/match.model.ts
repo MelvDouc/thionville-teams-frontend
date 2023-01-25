@@ -1,22 +1,18 @@
 import Model from "../core/Model.js";
 import { query } from "../services/database.service.js";
-import { IMatch, MatchResult } from "../types.js";
-import Team from "./team.model.js";
+import { IDbMatch, IMatch, MatchResult } from "../types.js";
 
-export default class Match extends Model implements IMatch {
+export default class Match extends Model implements IDbMatch {
   protected static override readonly TABLE_NAME = "tchMatch";
 
-  public static override create(entity: IMatch): Match {
+  public static override create(entity: IDbMatch): Match {
     return new Match(entity);
   }
 
-  public static override async getAll<T = Match>(): Promise<T[]> {
-    const thionville = await Team.getOne([], { id: process.env.THIONVILLE_TEAM_ID }) as Awaited<Team>;
-    const sql = Team.getSql("all-matches.sql").replace(/__\w+__/g, (prop) => {
-      return `"${thionville[prop.slice(2, -2) as keyof Team]}"`;
-    });
-    const result = await query(sql) as Awaited<[Match[], any[]]>;
-    return result[0].map(this.create, this) as T[];
+  public static async getFullInfo(matchId: number) {
+    const sql = Match.getSql("full-match-info.sql");
+    const [match] = await query(sql, [matchId]) as Awaited<[IMatch[], any[]]>;
+    return match[0];
   }
 
   public static async getResults(matchId: number) {
@@ -29,13 +25,12 @@ export default class Match extends Model implements IMatch {
   }
 
   public round: number;
-  public opponent: string;
-  public address: string;
-  public city: string;
-  public zip: string;
+  public whiteTeamId: number;
+  public blackTeamId: number;
+  public homeTeamId: number;
   public date: string;
 
-  constructor(match?: IMatch) {
+  constructor(match?: IDbMatch) {
     super();
     if (match)
       Object.assign(this, match);

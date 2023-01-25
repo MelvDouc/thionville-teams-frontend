@@ -3,8 +3,7 @@ import asyncWrapper from "../middleware/async-wrapper.middleware.js";
 import Player from "../models/player.model.js";
 import { getRatingById } from "../services/web-scraping.service.js";
 
-const playerController = Controller(Player, "/players");
-playerController.put!["/players"] = asyncWrapper(async (req, res) => {
+const updatePlayersFromTeam = asyncWrapper(async (req, res) => {
   const teamId = +(req.query.team_id!);
 
   if (isNaN(teamId))
@@ -24,4 +23,11 @@ playerController.put!["/players"] = asyncWrapper(async (req, res) => {
   res.json({ success: true });
 });
 
-export default playerController;
+export default {
+  getPlayer: Controller.getOne(Player),
+  getPlayers: Controller.getAll(Player),
+  createPlayer: Controller.createOne(Player),
+  updatePlayer: Controller.updateOne(Player),
+  updatePlayersFromTeam,
+  deletePlayer: Controller.deleteOne(Player)
+};

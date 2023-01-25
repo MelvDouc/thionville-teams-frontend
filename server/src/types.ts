@@ -21,8 +21,6 @@ export type UserRole = "SUPER_ADMIN" | "ADMIN" | "USER";
 export type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
 export type Path = `/${string}`;
 export type Handler = (req: Req, res: Res) => unknown;
-type FullController = Record<HttpMethod, Record<Path, Handler>>;
-export type Controller = Partial<FullController>;
 
 export interface WithId {
   id: number;
@@ -62,13 +60,20 @@ export interface ITeam extends WithId {
   website: string | null;
 }
 
-export interface IMatch extends WithId {
+export interface IDbMatch extends WithId {
   round: number;
-  opponent: string;
+  whiteTeamId: number;
+  blackTeamId: number;
+  homeTeamId: number;
+  date: string;
+}
+
+export interface IMatch extends Exclude<IDbMatch, "homeTeamId"> {
+  whiteTeam: string;
+  blackTeam: string;
   address: string;
   city: string;
   zip: string;
-  date: string;
 }
 
 export interface MatchResult {
