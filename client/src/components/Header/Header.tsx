@@ -14,6 +14,9 @@ export default function Header({ setUrl }: {
           <li>
             <Link href="/matchs" setUrl={setUrl}>Matchs</Link>
           </li>
+          <li>
+            <Link href="/equipes" setUrl={setUrl}>Équipes</Link>
+          </li>
         </ul>
       </nav>
     </header>

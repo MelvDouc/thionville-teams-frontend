@@ -1,5 +1,6 @@
 import MatchesTable from "../components/MatchesTable/MatchesTable.jsx";
 import PlayersTable from "../components/PlayersTable/PlayersTable.jsx";
+import TeamsTable from "../components/TeamsTable/TeamsTable.jsx";
 
 class Router {
   #url = "";
@@ -58,6 +59,10 @@ router
   .addRoute("/matchs", {
     title: "Matchs",
     component: MatchesTable
+  })
+  .addRoute("/equipes", {
+    title: "Équipes",
+    component: TeamsTable
   });
 
 export default router;

@@ -1,10 +1,25 @@
 header {
+  padding: 1.2em 0.75em;
+  background-image: linear-gradient(to right, hwb(225 18% 10%), hwb(231 16% 10%));
+
   nav {
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
 
     ul {
-      display: flex;
       list-style: none;
+      display: flex;
+      gap: 1em;
+
+      a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+          color: gold;
+        }
+      }
     }
   }
 }
