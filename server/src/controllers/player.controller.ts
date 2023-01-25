@@ -13,7 +13,7 @@ playerController.put!["/players"] = asyncWrapper(async (req, res) => {
       error: "A team id is required."
     });
 
-  const players = await Player.getAll([], { teamId });
+  const players = await Player.getAll<Player>([], { teamId });
   const [updatedAt] = new Date().toISOString().replace("T", " ").split(".");
 
   for (const player of players) {

@@ -10,7 +10,7 @@ export default class Match extends Model implements IMatch {
     return new Match(entity);
   }
 
-  public static override async getAll(): Promise<Match[]> {
+  public static override async getAll<T = Match>(): Promise<T[]> {
     const thionville = await Team.getOne([], { id: process.env.THIONVILLE_TEAM_ID }) as Awaited<Team>;
     const address = thionville?.address ?? "3 rue du Cygne",
       city = thionville?.city ?? "Thionville",
@@ -29,7 +29,7 @@ export default class Match extends Model implements IMatch {
       JOIN team ON team.id = tchMatch.opponentId
   `;
     const result = await query(sql) as Awaited<[Match[], any[]]>;
-    return result[0].map(this.create, this);
+    return result[0].map(this.create, this) as T[];
   }
 
   public static async getResults(matchId: number) {

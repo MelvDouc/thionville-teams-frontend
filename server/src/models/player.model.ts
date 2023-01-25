@@ -9,16 +9,6 @@ export default class Player extends Model implements IPlayer {
     return new Player(entity);
   }
 
-  public static override async getOne(columns: (keyof Player)[] = [], filter: MySqlSearchRecord<Player> = {}): Promise<Player | null> {
-    // @ts-ignore
-    return await super.getOne.apply(this, [columns, filter]);
-  }
-
-  public static override async getAll(columns: (keyof Player)[] = [], filter: MySqlSearchRecord<Player> = {}): Promise<Player[]> {
-    // @ts-ignore
-    return await super.getAll.apply(this, [columns, filter]);
-  }
-
   public ffeId: string;
   public lastName: string;
   public firstName: string;
