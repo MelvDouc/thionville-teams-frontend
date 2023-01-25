@@ -6,17 +6,17 @@ export default function App() {
   window.onpopstate = () => setUrl(location.pathname);
   router.onUrlChange(({ title }) => document.title = `Équipe N3 | ${title}`);
 
-  const app = (
+  const App = (
     <div id="App">
       <Header setUrl={setUrl} />
       <main $init={(element) => {
-        router.onUrlChange(async ({ component: page }) => {
-          element.replaceChildren(await page());
+        router.onUrlChange(async ({ component }) => {
+          element.replaceChildren(await component());
         });
       }}></main>
     </div>
   );
 
   router.setUrl(location.pathname);
-  return app;
+  return App;
 }
