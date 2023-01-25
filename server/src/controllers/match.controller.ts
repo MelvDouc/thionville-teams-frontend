@@ -5,7 +5,10 @@ export default {
   getMatch: Controller.getOne(Match),
   getMatchs: Controller.getAll(Match),
   getFullMatchesByTeamId: asyncWrapper(async (req, res) => {
-    const entities = await Match.getFullInfo(+req.query.id!);
+    const entities = await Match.getFullInfo({
+      teamId: +req.query.teamId!,
+      season: +req.query.season!
+    });
     res.json(entities);
   }),
   createMatch: Controller.createOne(Match),

@@ -18,6 +18,8 @@ FROM
   JOIN team wTeam ON wTeam.id = whiteTeamId
   JOIN team bTeam ON bTeam.id = blackTeamId
 WHERE
-  tchMatch.id = ?
-LIMIT
-  1
+  season = ?
+  AND (
+    whiteTeamId = ?
+    OR blackTeamId = ?
+  )

@@ -3,8 +3,8 @@
 server/dist/
 server/**/*.local.*
 
-client/css/*
-client/js/*
+client/css
+client/js
 
 server/**/*.json
 .env

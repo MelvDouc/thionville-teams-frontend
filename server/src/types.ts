@@ -65,10 +65,11 @@ export interface IDbMatch extends WithId {
   whiteTeamId: number;
   blackTeamId: number;
   homeTeamId: number;
+  season: number;
   date: string;
 }
 
-export interface IMatch extends Exclude<IDbMatch, "homeTeamId"> {
+export interface IMatch extends Exclude<IDbMatch, "homeTeamId" | "season"> {
   whiteTeam: string;
   blackTeam: string;
   address: string;

@@ -9,10 +9,10 @@ export default class Match extends Model implements IDbMatch {
     return new Match(entity);
   }
 
-  public static async getFullInfo(matchId: number) {
+  public static async getFullInfo({ season, teamId }: { season: number; teamId: number; }) {
     const sql = Match.getSql("full-match-info.sql");
-    const [match] = await query(sql, [matchId]) as Awaited<[IMatch[], any[]]>;
-    return match[0];
+    const [matches] = await query(sql, [season, teamId, teamId]) as Awaited<[IMatch[], any[]]>;
+    return matches;
   }
 
   public static async getResults(matchId: number) {
@@ -28,6 +28,7 @@ export default class Match extends Model implements IDbMatch {
   public whiteTeamId: number;
   public blackTeamId: number;
   public homeTeamId: number;
+  public season: number;
   public date: string;
 
   constructor(match?: IDbMatch) {
