@@ -1,3 +1,5 @@
+import { readFileSync } from "fs";
+import { resolve } from "path";
 import {
   create,
   deleteAll,
@@ -27,6 +29,10 @@ export default abstract class Model implements WithId {
   public static async getAll<T extends Model>(columns: (keyof T)[] = [], filter: MySqlSearchRecord<T> = {}): Promise<T[]> {
     const entities = await getAll(this.TABLE_NAME, columns, filter);
     return entities.map((entity) => this.create(entity)) as T[];
+  }
+
+  protected static getSql(fileName: string): string {
+    return readFileSync(resolve("server", "sql", fileName), "utf-8");
   }
 
   public id: number;

@@ -1,6 +1,6 @@
 import Model from "../core/Model.js";
 import { query } from "../services/database.service.js";
-import { IPlayer, MySqlSearchRecord } from "../types.js";
+import { IPlayer } from "../types.js";
 
 export default class Player extends Model implements IPlayer {
   protected static override readonly TABLE_NAME = "player";
@@ -25,13 +25,8 @@ export default class Player extends Model implements IPlayer {
   }
 
   public async getAverageScore(): Promise<number> {
-    const search = await query(`
-      SELECT
-        AVG(roster.result) AS average
-      FROM roster
-        JOIN player ON player.id = roster.playerId
-      WHERE player.id = ?
-    `, [this.id]) as Awaited<[[{ average: number; }], any[]]>;
+    const sql = Player.getSql("average-score.sql");
+    const search = await query(sql, [this.id]) as Awaited<[[{ average: number; }], any[]]>;
     return search[0][0].average;
   }
 }

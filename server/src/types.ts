@@ -71,6 +71,13 @@ export interface IMatch extends WithId {
   date: string;
 }
 
+export interface MatchResult {
+  boardAndColor: string;
+  fullName: string;
+  result: number;
+  opponent: string;
+}
+
 export type Roster = {
   ffeId: string;
   fullName: string;

@@ -1,11 +1,6 @@
-import { readFileSync } from "fs";
-import { join } from "path";
 import Model from "../core/Model.js";
 import { query } from "../services/database.service.js";
 import { ITeam, Roster } from "../types.js";
-
-const __dirname = new URL(".", import.meta.url).pathname;
-const rosterSql = readFileSync(join(__dirname, "team.model.sql"), "utf-8");
 
 export default class Team extends Model implements ITeam {
   protected static override readonly TABLE_NAME = "team";
@@ -15,7 +10,8 @@ export default class Team extends Model implements ITeam {
   }
 
   public static async getRoster(matchId: number): Promise<Roster> {
-    const [result] = await query(rosterSql, [matchId]) as Awaited<[Roster, any[]]>;
+    const sql = Team.getSql("roster.sql");
+    const [result] = await query(sql, [matchId]) as Awaited<[Roster, any[]]>;
     return result;
   }
 
