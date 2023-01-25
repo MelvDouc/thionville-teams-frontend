@@ -1,7 +1,7 @@
-import { Req, Res } from "../types.js";
+import { Handler } from "../types.js";
 
-const asyncWrapper = (routeFn: (req: Req, res: Res) => Promise<void | Res>) => {
-  const wrappedFn: typeof routeFn = async (req, res) => {
+const asyncWrapper = (routeFn: Handler): Handler => {
+  const wrappedFn: Handler = async (req, res) => {
     try {
       return await routeFn(req, res);
     } catch (error) {

@@ -1,20 +1,32 @@
 import { Router } from "express";
-import MatchController from "../controllers/match.controller.js";
-import PlayerController from "../controllers/player.controller.js";
-import TeamController from "../controllers/team.controller.js";
-import UserController from "../controllers/user.controller.js";
+import matchController from "../controllers/match.controller.js";
+import playerController from "../controllers/player.controller.js";
+import teamController from "../controllers/team.controller.js";
+import userController from "../controllers/user.controller.js";
+import { Controller, HttpMethod, Path } from "../types.js";
 
 const apiRouter = Router();
 
-new PlayerController({ prefix: "/players", router: apiRouter });
-new TeamController({ prefix: "/teams", router: apiRouter });
-new MatchController({ prefix: "/matches", router: apiRouter });
-const uc = new UserController({ prefix: "/users", router: apiRouter });
-
-console.log(uc.getRouter());
+addControllerMethods(playerController);
+addControllerMethods(matchController);
+addControllerMethods(teamController);
+addControllerMethods(userController);
 
 apiRouter.all("*", (req, res) => {
   res.status(404).send("404 Page Not Found");
 });
+
+function addControllerMethods(controller: Controller) {
+  let httpMethod: HttpMethod,
+    path: Path;
+
+  for (httpMethod in controller) {
+    const handlers = controller[httpMethod]!;
+    for (path in handlers) {
+      const handler = handlers[path] as any;
+      apiRouter[httpMethod](path, handler);
+    }
+  }
+}
 
 export default apiRouter;
