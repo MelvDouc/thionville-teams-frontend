@@ -1,5 +1,5 @@
 :root {
-  --clr_skyblue: skyblue;
+  --clr-skyblue: skyblue;
 }
 
 * {
@@ -13,10 +13,9 @@ body {
 }
 
 #App {
+  height: 100%;
+  padding: 1em;
   display: flex;
   flex-direction: column;
-  padding: 1em;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-@import "table";

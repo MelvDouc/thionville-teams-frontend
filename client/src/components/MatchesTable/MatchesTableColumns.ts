@@ -1,4 +1,3 @@
-import { MatchInfo, TableColumn } from "../../types.js";
 import formatDate from "../../utils/date-formatter.js";
 
 const MatchesTableColumns: TableColumn<MatchInfo>[] = [

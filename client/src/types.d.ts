@@ -1,4 +1,11 @@
-export interface Player {
+import("reactfree-jsx");
+
+interface Page {
+  title: string;
+  component: (...args: any[]) => Node | Promise<Node>;
+}
+
+interface Player {
   /**
    * The FIDE id.
    */
@@ -13,7 +20,7 @@ export interface Player {
   updatedAt: string;
 }
 
-export interface MatchInfo {
+interface MatchInfo {
   round: number;
   whiteTeam: string;
   blackTeam: string;
@@ -23,14 +30,7 @@ export interface MatchInfo {
   date: string;
 }
 
-export interface ElementDescriptor<K extends keyof HTMLElementTagNameMap> {
-  tagName: K;
-  properties?: Record<string, any>;
-  $init?: (element: HTMLElementTagNameMap[K]) => void;
-  children?: ElementDescriptor<any>[];
-}
-
-export interface TableColumn<T> {
+interface TableColumn<T> {
   header: string;
   getRow: (element: T) => string | number;
 }
