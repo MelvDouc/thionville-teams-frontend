@@ -1,4 +1,4 @@
-import Link from "./components/Link/Link.js";
+import Header from "./components/Header/Header.jsx";
 import router from "./utils/router.js";
 
 export default function App() {
@@ -8,15 +8,7 @@ export default function App() {
 
   const app = (
     <div id="App">
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link href="/matchs" setUrl={setUrl}>Matchs</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <Header setUrl={setUrl} />
       <main $init={(element) => {
         router.onUrlChange(async ({ component: page }) => {
           element.replaceChildren(await page());
