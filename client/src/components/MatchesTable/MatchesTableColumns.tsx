@@ -15,7 +15,7 @@ const MatchesTableColumns: TableColumn<MatchInfo>[] = [
   },
   {
     header: "Adresse",
-    getRow: (match) => match.address
+    getRow: (match) => <div className="pre-line">{match.address}</div>
   },
   {
     header: "Ville",

@@ -1,6 +1,6 @@
 import("reactfree-jsx");
 
-interface Page {
+interface Route {
   title: string;
   component: (...args: any[]) => Node | Promise<Node>;
 }
@@ -32,5 +32,5 @@ interface MatchInfo {
 
 interface TableColumn<T> {
   header: string;
-  getRow: (element: T) => string | number;
+  getRow: (element: T) => string | number | Node;
 }
