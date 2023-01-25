@@ -25,6 +25,7 @@ export default class Player extends Model implements IPlayer {
   public email: string;
   public tel: string | null;
   public rating: number;
+  public teamId: number;
   public updatedAt: string;
 
   constructor(player?: IPlayer) {

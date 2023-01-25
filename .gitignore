@@ -1,6 +1,7 @@
 **/node_modules
 **/.vscode
 server/dist/
+server/**/*.local.*
 
 client/css/*
 client/js/*

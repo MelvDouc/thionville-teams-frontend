@@ -11,7 +11,7 @@ export default class Match extends Model implements IMatch {
   }
 
   public static override async getAll(): Promise<Match[]> {
-    const thionville = await Team.getOne([], { id: process.env.THIONVILLE_ECHECS_ID });
+    const thionville = await Team.getOne([], { id: process.env.THIONVILLE_TEAM_ID }) as Awaited<Team>;
     const address = thionville?.address ?? "3 rue du Cygne",
       city = thionville?.city ?? "Thionville",
       zip = thionville?.zip ?? "57100";

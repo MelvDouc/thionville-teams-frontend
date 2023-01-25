@@ -5,13 +5,20 @@ import { getRatingById } from "../services/web-scraping.service.js";
 
 const playerController = Controller(Player, "/players");
 playerController.put!["/players"] = asyncWrapper(async (req, res) => {
-  const players = await Player.getAll();
-  const [date] = new Date().toISOString().replace("T", " ").split(".");
+  const teamId = +(req.query.team_id!);
+
+  if (isNaN(teamId))
+    return res.json({
+      success: false,
+      error: "A team id is required."
+    });
+
+  const players = await Player.getAll([], { teamId });
+  const [updatedAt] = new Date().toISOString().replace("T", " ").split(".");
 
   for (const player of players) {
     const rating = await getRatingById(player.id);
-    console.log(`rating: ${rating}`);
-    await player.update({ rating, updatedAt: date });
+    await player.update({ rating, updatedAt });
   }
 
   res.json({ success: true });

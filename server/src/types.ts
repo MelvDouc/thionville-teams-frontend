@@ -9,7 +9,7 @@ declare global {
       readonly MYSQL_PASSWORD: string;
       readonly MYSQL_DATABASE_NAME: string;
       readonly API_TOKEN: string;
-      readonly THIONVILLE_ECHECS_ID: number;
+      readonly THIONVILLE_TEAM_ID: number;
     }
   }
 }
@@ -39,6 +39,7 @@ export interface IPlayer extends WithId {
   email: string;
   tel: string | null;
   rating: number;
+  teamId: ITeam["id"];
   updatedAt: string;
 }
 
@@ -72,7 +73,7 @@ export interface IMatch extends WithId {
 
 export type Roster = {
   ffeId: string;
-  name: string;
+  fullName: string;
   boardAndColor: string;
 }[];
 

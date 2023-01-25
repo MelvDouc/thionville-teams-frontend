@@ -39,8 +39,9 @@ function createUpdateOneFn(model: typeof Model) {
 
 function createDeleteOneFn(model: typeof Model) {
   return asyncWrapper(async (req, res) => {
-    const entity = model.create(req.params.id);
-    await entity.delete();
+    const entity = await model.getOne([], { id: +req.params.id });
+    if (entity)
+      await entity.delete();
     res.json({ success: true });
   });
 }
