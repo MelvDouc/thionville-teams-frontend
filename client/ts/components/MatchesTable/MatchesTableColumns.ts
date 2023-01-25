@@ -7,8 +7,12 @@ const MatchesTableColumns: TableColumn<MatchInfo>[] = [
     getRow: (match) => match.round
   },
   {
-    header: "Adversaire",
-    getRow: (match) => match.opponent
+    header: "Blancs au 1er",
+    getRow: (match) => match.whiteTeam
+  },
+  {
+    header: "Noirs au 1er",
+    getRow: (match) => match.blackTeam
   },
   {
     header: "Adresse",

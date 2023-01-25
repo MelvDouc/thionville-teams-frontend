@@ -9,12 +9,14 @@ export interface Player {
   email: string;
   tel: string | null;
   rating: number;
+  teamId: number;
   updatedAt: string;
 }
 
 export interface MatchInfo {
   round: number;
-  opponent: string;
+  whiteTeam: string;
+  blackTeam: string;
   address: string;
   city: string;
   zip: string;

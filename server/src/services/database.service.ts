@@ -43,7 +43,6 @@ export async function getOne<T extends {}>(tableName: string, columns: (keyof T)
   const cols = columns.length ? columns.join() : "*";
   const sql = `SELECT ${cols} FROM ${tableName} WHERE ${placeholders} LIMIT 1 `;
   const [search] = await connection.query(sql, values) as Awaited<[T[], any[]]>;
-  console.log(`(1) sql: ${sql}`);
   return search[0] ?? null;
 }
 
@@ -51,9 +50,8 @@ export async function getAll<T extends {}>(tableName: string, columns: (keyof T)
   const { placeholders, values } = parseMysqlOperators(filter);
   const cols = columns.length ? columns.join() : "*";
   let sql = `SELECT ${cols} FROM ${tableName}`;
-  if (values.length)
+  if (placeholders.length)
     sql += ` WHERE ${placeholders}`;
-  console.log(`(2) sql: ${sql}`);
   const [search] = await connection.query(sql, values) as Awaited<[T[], any[]]>;
   return search ?? [];
 }
