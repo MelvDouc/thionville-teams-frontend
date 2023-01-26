@@ -22,10 +22,6 @@
   tr {
     border-top: $border;
 
-    &:last-of-type {
-      border-bottom: $border;
-    }
-
     &.selected>td:nth-child(2) {
       font-weight: 600;
     }
