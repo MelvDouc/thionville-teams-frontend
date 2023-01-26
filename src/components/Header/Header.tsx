@@ -9,13 +9,13 @@ export default function Header({ setUrl }: {
       <nav>
         <ul>
           <li>
-            <Link href="/" setUrl={setUrl}>Accueil</Link>
-          </li>
-          <li>
-            <Link href="/matchs" setUrl={setUrl}>Matchs</Link>
+            <Link href="/joueurs" setUrl={setUrl}>Joueurs</Link>
           </li>
           <li>
             <Link href="/equipes" setUrl={setUrl}>Équipes</Link>
+          </li>
+          <li>
+            <Link href="/matchs" setUrl={setUrl}>Matchs</Link>
           </li>
         </ul>
       </nav>
