@@ -1,5 +1,5 @@
 import Model from "../core/Model.js";
-import { hashPassword } from "../services/password.service.js";
+import { createToken, hashPassword } from "../services/auth.service.js";
 import { IUser, UserRole } from "../types.js";
 
 
@@ -25,6 +25,7 @@ export default class User extends Model implements IUser {
 
   override async save() {
     this.password = await hashPassword(this.password);
+    this.token = createToken();
     return await super.save();
   }
 }

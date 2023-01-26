@@ -1,7 +1,7 @@
 const TeamsTableColumns: TableColumn<Team>[] = [
   {
     header: "N° FFE",
-    getRow: (team) => team.id
+    getRow: ({ id }) => <a href={`http://www.echecs.asso.fr/FicheClub.aspx?Ref=${id}`}>{id}</a>
   },
   {
     header: "Nom",

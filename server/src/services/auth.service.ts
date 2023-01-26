@@ -1,4 +1,5 @@
 import bcryptjs from "bcryptjs";
+import { randomBytes } from "crypto";
 
 const { genSalt, hash, compareSync } = bcryptjs;
 
@@ -10,4 +11,8 @@ export async function hashPassword(password: string): Promise<string> {
 
 export function comparePassword(password: string, hashed: string): boolean {
   return compareSync(password, hashed);
+}
+
+export function createToken(): string {
+  return randomBytes(32).toString("hex");
 }
