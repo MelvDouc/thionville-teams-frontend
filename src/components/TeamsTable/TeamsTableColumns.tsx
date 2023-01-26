@@ -12,16 +12,16 @@ const TeamsTableColumns: TableColumn<Team>[] = [
     getRow: ({ address, city, zip }) => <div className="pre-line">{`${address}\n${zip} ${city}`}</div>
   },
   {
-    header: "Contact",
-    getRow: ({ name, email, tel, website }) => {
-      return (
-        <address className="pre-line">
-          <div><a href={`mailto:${email}`}>{email}</a></div>
-          {tel && <div>{tel}</div>}
-          {website && <div><a href={"http://" + website}>Site de {name}</a></div>}
-        </address>
-      );
-    }
+    header: "Email",
+    getRow: (team) => <div><a href={`mailto:${team.email}`}>Contacter</a></div>
+  },
+  {
+    header: "Tél.",
+    getRow: (team) => team.tel
+  },
+  {
+    header: "Site web",
+    getRow: ({ website }) => website && <div><a href={"http://" + website} target="_blank">Visiter</a></div>
   }
 ];
 
