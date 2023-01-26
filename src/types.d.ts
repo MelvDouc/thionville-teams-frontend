@@ -1,4 +1,4 @@
-import("reactfree-jsx");
+type Obs<T> = import("reactfree-jsx").Observable<T>;
 
 interface Route {
   title: string;
