@@ -3,6 +3,7 @@
 
 :root {
   --clr-skyblue: skyblue;
+  --clr-black-dark: rgb(34, 34, 34);
 }
 
 * {
@@ -27,6 +28,47 @@ main {
   overflow: auto;
 }
 
+.grid-center {
+  display: grid;
+  place-items: center;
+}
+
 .info {
   margin-bottom: 1em;
+}
+
+@for $i from 1 through 6 {
+  $em: $i * 0.2em;
+
+  .mt-#{$i} {
+    margin-top: $em;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: $em;
+  }
+
+  .ml-#{$i} {
+    margin-left: $em;
+  }
+
+  .mr-#{$i} {
+    margin-right: $em;
+  }
+
+  .pt-#{$i} {
+    padding-top: $em;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: $em;
+  }
+
+  .pl-#{$i} {
+    padding-left: $em;
+  }
+
+  .pr-#{$i} {
+    padding-right: $em;
+  }
 }
