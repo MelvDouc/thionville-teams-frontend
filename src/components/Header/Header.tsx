@@ -1,24 +1,21 @@
 import Link from "../Link/Link.jsx";
 import "./Header.scss";
 
-export default function Header({ setUrl }: {
-  setUrl: (url: string) => void;
-}) {
+export default function Header() {
   return (
     <header>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/joueurs" setUrl={setUrl}>Joueurs</Link>
-          </li>
-          <li>
-            <Link href="/equipes" setUrl={setUrl}>Équipes</Link>
-          </li>
-          <li>
-            <Link href="/matchs" setUrl={setUrl}>Matchs</Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="header__left">
+        <h1>Thionville Échecs — Équipes N3</h1>
+      </div>
+      <div className="header__right">
+        <nav>
+          <ul>
+            <li><Link href="/joueurs">Joueurs</Link></li>
+            <li><Link href="/equipes">Équipes</Link></li>
+            <li><Link href="/matchs">Matchs</Link></li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

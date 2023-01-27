@@ -1,12 +1,14 @@
-export default function Link({ href, setUrl, children }: {
+import router from "../../utils/router.js";
+
+export default function Link({ href, children }: {
   href: string;
-  setUrl: (url: string) => void;
   children?: (Node | string)[];
 }) {
+
   return (
     <a href={href} onclick={(e) => {
       e.preventDefault();
-      setUrl(href);
+      router.setUrl(href);
     }}>{children}</a>
   );
 }
