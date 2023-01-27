@@ -10,14 +10,17 @@ export default function App() {
   const App = (
     <div id="App">
       <Header />
-      <main className={"overflow-y-auto h-100 p-4"} $init={(element) => {
-        router.onUrlChange(async ({ component }) => {
-          element.replaceChildren(await component());
-        });
-      }}></main>
+      <main className="overflow-y-auto h-100 p-4" $init={updateUI}>
+      </main>
     </div>
   );
 
   router.setUrl(location.pathname + location.search);
   return App;
+}
+
+function updateUI(container: HTMLElement) {
+  router.onUrlChange(async ({ component }) => {
+    container.replaceChildren(await component());
+  });
 }
