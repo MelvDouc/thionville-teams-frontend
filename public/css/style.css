@@ -13,6 +13,10 @@ body {
   font-family: 'Source Sans Pro', 'Nunito Sans', Verdana, Geneva, Tahoma, sans-serif;
 }
 
+h2 {
+  margin-bottom: 1em;
+}
+
 .pre-line {
   white-space: pre-line;
 }
