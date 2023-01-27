@@ -3,7 +3,7 @@ import { urls, getApiData, season } from "../utils/api.js";
 
 export default async function BoardInfoPage() {
   const roundStr = new URLSearchParams(location.search).get("id_match")!;
-  const round = +roundStr;
+  const round = parseInt(roundStr);
   const boardInfoList = (isNaN(round))
     ? []
     : await getApiData<BoardInfo[]>(`${urls.BOARD_INFO}?season=${season}&round=${round}`, [] as BoardInfo[]);
@@ -13,6 +13,7 @@ export default async function BoardInfoPage() {
 
   return (
     <div className="container">
+      <h2>Joueurs</h2>
       <Table columns={boardInfoListColumns} values={boardInfoList} />
       {averageRating && <p>Elo moyen :&nbsp;{averageRating.toFixed(2)}</p>}
     </div>

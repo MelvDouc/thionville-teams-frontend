@@ -13,6 +13,7 @@ export default async function TeamsPage() {
 
   return (
     <div className="container">
+      <h2>Équipes</h2>
       <Table values={teams} columns={teamsTableColumns} />
     </div>
   );

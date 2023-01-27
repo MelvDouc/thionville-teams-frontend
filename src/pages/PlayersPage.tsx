@@ -7,6 +7,7 @@ export default async function PlayersPage() {
 
   return (
     <div className="container">
+      <h2>Tous les joueurs</h2>
       <Table columns={playersTableColumns} values={players} />
     </div>
   );

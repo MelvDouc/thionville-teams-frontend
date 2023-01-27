@@ -8,8 +8,9 @@ export default async function MatchesPage() {
 
   return (
     <div>
-      <p>Tous les matchs commencent à <strong>14h15</strong>.</p>
       <div className="container">
+        <h2>Matchs</h2>
+        <p>Tous les matchs commencent à <strong>14h15</strong>.</p>
         <Table columns={matchesTableColumns} values={matchInfo} />
       </div>
     </div>
