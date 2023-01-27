@@ -1,10 +1,11 @@
-import MatchesTable from "../components/MatchesTable/MatchesTable.jsx";
-import PlayersTable from "../components/PlayersTable/PlayersTable.jsx";
-import TeamsTable from "../components/TeamsTable/TeamsTable.jsx";
+import BoardInfoPage from "../pages/BoardInfoPage.jsx";
+import MatchesPage from "../pages/MatchesPage.jsx";
+import PlayersPage from "../pages/PlayersPage.jsx";
+import TeamsPage from "../pages/TeamsPage.jsx";
 
 class Router {
   #url = "";
-  #routes = new Map<string, Route>();
+  #routes = new Map<string | RegExp, Route>();
   #subscriptions = new Set<(page: Route) => void>();
 
   constructor() {
@@ -17,34 +18,39 @@ class Router {
       }
     });
     this.onUrlChange(() => {
-      if (location.pathname !== this.#url)
-        history.pushState({}, "", this.#url);
+      // if (location.pathname !== this.#url)
+      history.pushState({}, "", this.#url);
     });
   }
 
-  getRoute(url: string) {
+  getRoute(url: string): Route | undefined {
     return this.#routes.get(url);
   }
 
-  addRoute(url: string, page: Route) {
+  addRoute(url: string | RegExp, page: Route): this {
     this.#routes.set(url, page);
     return this;
   }
 
-  setUrl(url: string) {
+  setUrl(url: string): void {
     this.#url = url;
     this.notify();
   }
 
-  onUrlChange(subscription: (page: Route) => void) {
+  onUrlChange(subscription: (page: Route) => void): void {
     this.#subscriptions.add(subscription);
-
-    return () => this.#subscriptions.delete(subscription);
   }
 
   notify(): void {
-    const page = this.#routes.get(this.#url) ?? this.#routes.get("404")!;
-    this.#subscriptions.forEach((subscription) => subscription(page));
+    for (const [path, route] of this.#routes) {
+      if (typeof path === "string" && path === this.#url || path instanceof RegExp && path.test(this.#url)) {
+        this.#subscriptions.forEach((subscription) => subscription(route));
+        return;
+      }
+    }
+
+    const notFoundPage = this.#routes.get("404")!;
+    this.#subscriptions.forEach((subscription) => subscription(notFoundPage));
   }
 }
 
@@ -53,16 +59,20 @@ const router = new Router();
 router
   .addRoute("/", {
     title: "Joueurs",
-    component: PlayersTable
+    component: PlayersPage
   })
   .addRoute("/joueurs", router.getRoute("/")!)
   .addRoute("/matchs", {
     title: "Matchs",
-    component: MatchesTable
+    component: MatchesPage
   })
   .addRoute("/equipes", {
     title: "Équipes",
-    component: TeamsTable
+    component: TeamsPage
+  })
+  .addRoute(/^\/equipe(\?.+)?/, {
+    title: "Équipe",
+    component: BoardInfoPage
   });
 
 export default router;
