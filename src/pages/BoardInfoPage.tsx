@@ -12,10 +12,8 @@ export default async function BoardInfoPage() {
     : 0;
 
   return (
-    <div>
-      <div className="grid-center">
-        <Table columns={boardInfoListColumns} values={boardInfoList} />
-      </div>
+    <div className="container">
+      <Table columns={boardInfoListColumns} values={boardInfoList} />
       {averageRating && <p>Elo moyen :&nbsp;{averageRating.toFixed(2)}</p>}
     </div>
   );

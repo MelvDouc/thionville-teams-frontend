@@ -12,7 +12,7 @@ export default async function TeamsPage() {
   }
 
   return (
-    <div className="grid-center">
+    <div className="container">
       <Table values={teams} columns={teamsTableColumns} />
     </div>
   );

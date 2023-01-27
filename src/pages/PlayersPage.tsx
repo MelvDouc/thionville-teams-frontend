@@ -6,7 +6,7 @@ export default async function PlayersPage() {
   const players = await getPlayers();
 
   return (
-    <div className="grid-center">
+    <div className="container">
       <Table columns={playersTableColumns} values={players} />
     </div>
   );

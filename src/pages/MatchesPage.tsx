@@ -6,14 +6,14 @@ import formatDate from "../utils/date-formatter.js";
 export default async function MatchesPage() {
   const matchInfo = await getMatches();
 
-  const fragment = document.createDocumentFragment();
-  fragment.append(
-    <p className="info">Tous les matchs commencent à <strong>14h15</strong>.</p>,
-    <div className="grid-center">
-      <Table columns={matchesTableColumns} values={matchInfo} />
+  return (
+    <div>
+      <p>Tous les matchs commencent à <strong>14h15</strong>.</p>
+      <div className="container">
+        <Table columns={matchesTableColumns} values={matchInfo} />
+      </div>
     </div>
   );
-  return fragment;
 }
 
 const matchesTableColumns: TableColumn<Match>[] = [
