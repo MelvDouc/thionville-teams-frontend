@@ -1,5 +1,6 @@
 import Header from "./components/Header/Header.jsx";
 import router from "./utils/router.js";
+import "./App.scss";
 
 export default function App() {
   const setUrl = router.setUrl.bind(router);
@@ -9,7 +10,7 @@ export default function App() {
   const App = (
     <div id="App">
       <Header />
-      <main $init={(element) => {
+      <main className={"overflow-y-auto h-100 p-4"} $init={(element) => {
         router.onUrlChange(async ({ component }) => {
           element.replaceChildren(await component());
         });
