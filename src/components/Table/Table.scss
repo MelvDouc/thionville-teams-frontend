@@ -4,11 +4,6 @@
   border: 1px solid transparent;
   border-spacing: 0;
   border-radius: 8px;
-  width: 80%;
-
-  thead tr {
-    color: white;
-  }
 
   tbody {
     tr:nth-child(odd) {
@@ -35,9 +30,5 @@
   th {
     text-align: start;
     background-color: var(--clr-black-dark);
-  }
-
-  .pre-line {
-    white-space: pre-line;
   }
 }

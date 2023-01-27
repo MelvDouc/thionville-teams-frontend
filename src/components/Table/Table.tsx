@@ -7,7 +7,7 @@ export default function Table<T>({ columns, values }: {
   return (
     <table className="table">
       <thead>
-        <tr>
+        <tr className="text-white">
           {columns.map((column) => (
             <th>{column.header}</th>
           ))}
