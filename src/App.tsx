@@ -3,12 +3,12 @@ import router from "./utils/router.js";
 
 export default function App() {
   const setUrl = router.setUrl.bind(router);
-  window.onpopstate = () => setUrl(location.pathname);
-  router.onUrlChange(({ title }) => document.title = `Équipe N3 | ${title}`);
+  window.onpopstate = () => setUrl(location.pathname + location.search);
+  router.onUrlChange(({ title }) => document.title = `Équipes N3 | ${title}`);
 
   const App = (
     <div id="App">
-      <Header setUrl={setUrl} />
+      <Header />
       <main $init={(element) => {
         router.onUrlChange(async ({ component }) => {
           element.replaceChildren(await component());
@@ -17,6 +17,6 @@ export default function App() {
     </div>
   );
 
-  router.setUrl(location.pathname);
+  router.setUrl(location.pathname + location.search);
   return App;
 }
