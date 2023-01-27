@@ -31,14 +31,25 @@ interface Team {
   website: string | null;
 }
 
-interface MatchInfo {
+interface Match {
+  id: number;
   round: number;
-  whiteTeam: string;
-  blackTeam: string;
+  whiteTeamName: string;
+  blackTeamName: string;
   address: string;
   city: string;
   zip: string;
   date: string;
+}
+
+interface BoardInfo {
+  ffeId: string;
+  firstName: string;
+  lastName: string;
+  board: number;
+  color: "B" | "N";
+  rating: number;
+  result: number;
 }
 
 interface TableColumn<T> {
