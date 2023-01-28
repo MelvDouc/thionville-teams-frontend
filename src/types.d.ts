@@ -34,7 +34,9 @@ interface Team {
 interface Match {
   id: number;
   round: number;
+  whiteTeamId: number;
   whiteTeamName: string;
+  blackTeamId: number;
   blackTeamName: string;
   address: string;
   city: string;
