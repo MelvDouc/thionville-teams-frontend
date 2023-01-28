@@ -2,12 +2,14 @@ import { Observable } from "reactfree-jsx";
 import Table from "../components/Table/Table.jsx";
 import { getPlayers, THIONVILLE_ID } from "../utils/api.js";
 import formatDate from "../utils/date-formatter.js";
+import getRandomId from "../utils/random-id.js";
 
 export default async function PlayersPage() {
   const players = await getPlayers();
   const allPlayerSet = new Set(players);
   const thionvillePlayersSet = new Set(players.filter(({ teamId }) => teamId === THIONVILLE_ID));
   const visibilityObs = new Observable(allPlayerSet);
+  const checkboxId = `checkbox-${getRandomId(10)}`;
 
   return (
     <div className="container">
@@ -16,14 +18,14 @@ export default async function PlayersPage() {
         <div>
           <input
             type="checkbox"
-            id="thionville-players-input"
+            id={checkboxId}
             className="me-2"
             onchange={(e) => {
               const { checked } = e.target as HTMLInputElement;
               visibilityObs.setValue((checked) ? thionvillePlayersSet : allPlayerSet);
             }}
           />
-          <label htmlFor="thionville-players-input">Thionville seulement</label>
+          <label htmlFor={checkboxId}>Thionville seulement</label>
         </div>
       </form>
       <Table columns={playersTableColumns} values={players} visibilityObs={visibilityObs} />
