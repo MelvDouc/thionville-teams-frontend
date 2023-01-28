@@ -34,18 +34,18 @@ function getRowInitializer<T>(obs?: Obs<Set<T>>) {
     if (!obs)
       return;
 
-    const emptySpan: HTMLSpanElement = <span className="empty"></span>;
-    let isSpan = false;
+    const emptyText = document.createTextNode("");
+    let isHidden = false;
 
     obs.subscribe((set) => {
-      if (set.has(value) && isSpan) {
-        isSpan = false;
-        emptySpan.replaceWith(row);
+      if (set.has(value) && isHidden) {
+        isHidden = false;
+        emptyText.replaceWith(row);
         return;
       }
-      if (!set.has(value) && !isSpan) {
-        isSpan = true;
-        row.replaceWith(emptySpan);
+      if (!set.has(value) && !isHidden) {
+        isHidden = true;
+        row.replaceWith(emptyText);
       }
     });
   };
