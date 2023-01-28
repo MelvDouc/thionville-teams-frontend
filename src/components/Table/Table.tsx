@@ -1,8 +1,9 @@
 import "./Table.scss";
 
-export default function Table<T>({ columns, values }: {
+export default function Table<T>({ columns, values, visibilityObs }: {
   columns: TableColumn<T>[];
   values: T[];
+  visibilityObs?: Obs<Set<T>>;
 }) {
   return (
     <table className="table">
@@ -15,7 +16,15 @@ export default function Table<T>({ columns, values }: {
       </thead>
       <tbody>
         {values.map((value) => (
-          <tr>
+          <tr $init={(element) => {
+            if (visibilityObs) {
+              visibilityObs.subscribe((set) => {
+                set.has(value)
+                  ? element.classList.remove("hidden")
+                  : element.classList.add("hidden");
+              });
+            }
+          }}>
             {columns.map((column) => (
               <td>{column.getRow(value)}</td>
             ))}
