@@ -39,6 +39,7 @@ interface Match {
   address: string;
   city: string;
   zip: string;
+  season: number;
   date: string;
 }
 
