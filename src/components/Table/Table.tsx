@@ -43,7 +43,7 @@ function getRowInitializer<T>(obs?: Obs<Set<T>>) {
         emptySpan.replaceWith(row);
         return;
       }
-      if (!isSpan) {
+      if (!set.has(value) && !isSpan) {
         isSpan = true;
         row.replaceWith(emptySpan);
       }
