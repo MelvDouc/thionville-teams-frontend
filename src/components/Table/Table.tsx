@@ -38,16 +38,14 @@ function getRowInitializer<T>(obs?: Obs<Set<T>>) {
     let isSpan = false;
 
     obs.subscribe((set) => {
-      if (set.has(value)) {
-        if (isSpan) {
-          isSpan = false;
-          emptySpan.replaceWith(row);
-        }
-      } else {
-        if (!isSpan) {
-          isSpan = true;
-          row.replaceWith(emptySpan);
-        }
+      if (set.has(value) && isSpan) {
+        isSpan = false;
+        emptySpan.replaceWith(row);
+        return;
+      }
+      if (!isSpan) {
+        isSpan = true;
+        row.replaceWith(emptySpan);
       }
     });
   };
