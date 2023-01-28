@@ -6,21 +6,19 @@
   border-radius: 8px;
 
   tbody {
-    tr {
-      &:nth-child(odd) {
+    >tr:not(.hidden) {
+      &:nth-of-type(odd) {
         $hue: 249;
         background-color: rgb($hue, $hue, $hue);
       }
 
-      &:nth-child(even) {
+      &:nth-of-type(even) {
         background-color: rgb(203, 236, 255);
       }
     }
-  }
 
-  tr {
-    &.selected>td:nth-child(2) {
-      font-weight: 600;
+    span.empty {
+      display: none;
     }
   }
 

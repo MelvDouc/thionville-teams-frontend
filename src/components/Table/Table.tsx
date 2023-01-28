@@ -5,6 +5,8 @@ export default function Table<T>({ columns, values, visibilityObs }: {
   values: T[];
   visibilityObs?: Obs<Set<T>>;
 }) {
+  const $initRow = getRowInitializer(visibilityObs);
+
   return (
     <table className="table">
       <thead>
@@ -16,15 +18,7 @@ export default function Table<T>({ columns, values, visibilityObs }: {
       </thead>
       <tbody>
         {values.map((value) => (
-          <tr $init={(element) => {
-            if (visibilityObs) {
-              visibilityObs.subscribe((set) => {
-                set.has(value)
-                  ? element.classList.remove("hidden")
-                  : element.classList.add("hidden");
-              });
-            }
-          }}>
+          <tr $init={(element) => $initRow(element, value)}>
             {columns.map((column) => (
               <td>{column.getRow(value)}</td>
             ))}
@@ -33,4 +27,28 @@ export default function Table<T>({ columns, values, visibilityObs }: {
       </tbody>
     </table>
   );
+}
+
+function getRowInitializer<T>(obs?: Obs<Set<T>>) {
+  return (row: HTMLTableRowElement, value: T) => {
+    if (!obs)
+      return;
+
+    const emptySpan: HTMLSpanElement = <span className="empty"></span>;
+    let isSpan = false;
+
+    obs.subscribe((set) => {
+      if (set.has(value)) {
+        if (isSpan) {
+          isSpan = false;
+          emptySpan.replaceWith(row);
+        }
+      } else {
+        if (!isSpan) {
+          isSpan = true;
+          row.replaceWith(emptySpan);
+        }
+      }
+    });
+  };
 }
