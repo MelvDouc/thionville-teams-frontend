@@ -3,7 +3,7 @@ import "./Header.scss";
 
 export default function Header() {
   return (
-    <header className="container-xxl bg-primary text-white px-3 py-2">
+    <header className="container-xxl bg-primary bg-gradient text-white px-3 py-2">
       <article className="row">
         <div className="col col-lg-auto">
           <h1 className="fs-3 m-0 p-0">Thionville Échecs —&nbsp;Équipes N3</h1>
