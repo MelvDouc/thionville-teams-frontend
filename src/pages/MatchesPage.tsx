@@ -20,7 +20,7 @@ export default async function MatchesPage() {
 const matchesTableColumns: TableColumn<Match>[] = [
   {
     header: "Rd.",
-    getRow: ({ id, round }) => <Link href={`/equipe?id_match=${id}`}>{round}</Link>
+    getRow: ({ season, round }) => <Link href={`/equipe?saison=${season}&ronde=${round}`}>{round}</Link>
   },
   {
     header: "Blancs au 1er",

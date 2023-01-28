@@ -4,7 +4,7 @@ import PlayersPage from "../pages/PlayersPage.jsx";
 import TeamsPage from "../pages/TeamsPage.jsx";
 
 class Router {
-  #url = "";
+  #url!: string;
   #routes = new Map<string | RegExp, Route>();
   #subscriptions = new Set<(page: Route) => void>();
 
@@ -18,13 +18,9 @@ class Router {
       }
     });
     this.onUrlChange(() => {
-      // if (location.pathname !== this.#url)
-      history.pushState({}, "", this.#url);
+      if (location.pathname !== this.#url)
+        history.pushState({}, "", this.#url);
     });
-  }
-
-  getRoute(url: string): Route | undefined {
-    return this.#routes.get(url);
   }
 
   addRoute(url: string | RegExp, page: Route): this {
@@ -42,26 +38,30 @@ class Router {
   }
 
   notify(): void {
-    for (const [path, route] of this.#routes) {
-      if (typeof path === "string" && path === this.#url || path instanceof RegExp && path.test(this.#url)) {
-        this.#subscriptions.forEach((subscription) => subscription(route));
+    for (const [path, page] of this.#routes) {
+      if (
+        typeof path === "string" && path === this.#url
+        || path instanceof RegExp && path.test(this.#url)
+      ) {
+        this.#subscriptions.forEach((subscription) => subscription(page));
         return;
       }
     }
 
-    const notFoundPage = this.#routes.get("404")!;
-    this.#subscriptions.forEach((subscription) => subscription(notFoundPage));
+    const page = this.#routes.get("404")!;
+    this.#subscriptions.forEach((subscription) => subscription(page));
   }
 }
 
 const router = new Router();
+const playersPage = {
+  title: "Joueurs",
+  component: PlayersPage
+};
 
 router
-  .addRoute("/", {
-    title: "Joueurs",
-    component: PlayersPage
-  })
-  .addRoute("/joueurs", router.getRoute("/")!)
+  .addRoute("/", playersPage)
+  .addRoute("/joueurs", playersPage)
   .addRoute("/matchs", {
     title: "Matchs",
     component: MatchesPage
@@ -70,7 +70,7 @@ router
     title: "Équipes",
     component: TeamsPage
   })
-  .addRoute(/^\/equipe(\?.+)?/, {
+  .addRoute(/^\/equipe/, {
     title: "Équipe",
     component: BoardInfoPage
   });

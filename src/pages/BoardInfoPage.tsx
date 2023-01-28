@@ -1,12 +1,11 @@
 import Table from "../components/Table/Table.jsx";
-import { urls, getApiData, season } from "../utils/api.js";
+import { getBoardInfoList } from "../utils/api.js";
 
 export default async function BoardInfoPage() {
-  const roundStr = new URLSearchParams(location.search).get("id_match")!;
-  const round = parseInt(roundStr);
-  const boardInfoList = (isNaN(round))
-    ? []
-    : await getApiData<BoardInfo[]>(`${urls.BOARD_INFO}?season=${season}&round=${round}`, [] as BoardInfo[]);
+  const query = new URLSearchParams(location.search);
+  const season = query.get("saison")!,
+    round = query.get("ronde")!;
+  const boardInfoList = await getBoardInfoList({ season, round });
   const averageRating = (boardInfoList.length)
     ? boardInfoList.reduce((acc, { rating }) => acc + rating, 0) / boardInfoList.length
     : 0;
