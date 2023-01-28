@@ -6,15 +6,16 @@ export default async function BoardInfoPage() {
   const season = query.get("saison")!,
     round = query.get("ronde")!;
   const boardInfoList = await getBoardInfoList({ season, round });
-  const averageRating = (boardInfoList.length)
-    ? boardInfoList.reduce((acc, { rating }) => acc + rating, 0) / boardInfoList.length
-    : 0;
 
   return (
     <div className="container">
       <h2>Joueurs</h2>
-      <Table columns={boardInfoListColumns} values={boardInfoList} />
-      {averageRating && <p>Elo moyen :&nbsp;{averageRating.toFixed(2)}</p>}
+      {boardInfoList.length > 0
+        ? <div>
+          <Table columns={boardInfoListColumns} values={boardInfoList} />
+          <p>Elo moyen :&nbsp;{(boardInfoList.reduce((acc, { rating }) => acc + rating, 0) / boardInfoList.length).toFixed(2)}</p>
+        </div>
+        : <p>Aucune équipe à afficher.</p>}
     </div>
   );
 }
